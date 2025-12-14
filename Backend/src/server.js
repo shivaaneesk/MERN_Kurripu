@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import path from "path";
 
+import authRoutes from "./Routes/authRoutes.js";
 import notesRoutes from "./Routes/noteRoutes.js";
 import { connectDB } from "./Config/db.js";
 import rateLimiter from "./Middleware/rateLimiter.js";
@@ -24,6 +25,7 @@ if (process.env.NODE_ENV !== "production") {
 app.use(express.json()); 
 app.use(rateLimiter);
 
+app.use("/api/auth", authRoutes);
 app.use("/api/notes", notesRoutes);
 
 if (process.env.NODE_ENV === "production") {
