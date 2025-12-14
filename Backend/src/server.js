@@ -4,8 +4,8 @@ import dotenv from "dotenv";
 import path from "path";
 
 import notesRoutes from "./Routes/noteRoutes.js";
-import { connectDB } from "./config/db.js";
-import rateLimiter from "./middleware/rateLimiter.js";
+import { connectDB } from "./Config/db.js";
+import rateLimiter from "./Middleware/rateLimiter.js";
 
 dotenv.config();
 
