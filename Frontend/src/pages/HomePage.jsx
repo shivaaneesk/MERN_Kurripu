@@ -25,7 +25,6 @@ const HomePage = () => {
         }
         else{
           if(error.response?.status === 401){
-            // user not authenticated - leave notes empty
             toast.error('Please login to see your notes');
           } else {
           toast.error("Failed to fetch notes.");

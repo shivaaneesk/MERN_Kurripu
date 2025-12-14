@@ -19,7 +19,6 @@ const LoginPage = () => {
     setLoading(true);
     try {
       const res = await api.post('/auth/login', { email, password });
-      // if backend returns a token, store it
       const token = res?.data?.token;
       if (token) {
         localStorage.setItem('token', token);
@@ -29,7 +28,6 @@ const LoginPage = () => {
     } catch (error) {
       console.error('Login error', error);
       if (!error.response) {
-        // Backend unreachable - enable demo mode by storing a demo token
         localStorage.setItem('token', 'demo-token');
         toast.success('Offline demo login');
         navigate('/home');

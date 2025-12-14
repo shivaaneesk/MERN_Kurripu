@@ -1,45 +1,41 @@
-import express from 'express';
-import noteRoutes from './Routes/noteRoutes.js';
-import authRoutes from './Routes/authRoutes.js';
-import { ConnectMongoDB } from './Config/db.js';
-import dotenv from 'dotenv';
-import rateLimiter from './Middleware/rateLimiter.js';
+import express from "express";
 import cors from "cors";
+import dotenv from "dotenv";
+import path from "path";
+
+import notesRoutes from "./Routes/noteRoutes.js";
+import { connectDB } from "./config/db.js";
+import rateLimiter from "./middleware/rateLimiter.js";
+
 dotenv.config();
-//const express = require('express');
-const Port = process.env.PORT || 5004;
+
 const app = express();
+const PORT = process.env.PORT || 5004;
+const __dirname = path.resolve();
 
-app.use(cors({
-    origin: 'http://localhost:5173',
-}));
-app.use(express.json());
-app.use(rateLimiter); 
-
-app.use("/api/first", noteRoutes);
-
-const startServer = () => {
-    app.listen(Port, () => {
-        console.log("Server is running on port:", Port);
-    });
-};
-
-// Mount routes under both /api/first and /api/notes for compatibility with frontend
-app.use('/api/notes', noteRoutes);
-// auth routes (signup/login)
-app.use('/api/auth', authRoutes);
-
-if (process.env.MONGO) {
-    // Only attempt to connect to MongoDB if MONGO is provided. This avoids failing to start
-    // the backend in development environments where Mongo isn't available.
-    ConnectMongoDB()
-        .then(() => startServer())
-        .catch((err) => {
-            // If DB connection fails, log and still start the server for local dev/test purposes.
-            console.error('MongoDB connection failed, starting server without DB:', err);
-            startServer();
-        });
-} else {
-    console.warn('No MONGO config found. Starting server without connecting to MongoDB.');
-    startServer();
+// middleware
+if (process.env.NODE_ENV !== "production") {
+  app.use(
+    cors({
+      origin: "http://localhost:5173",
+    })
+  );
 }
+app.use(express.json()); 
+app.use(rateLimiter);
+
+app.use("/api/notes", notesRoutes);
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+  });
+}
+
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log("Server started on PORT:", PORT);
+  });
+});

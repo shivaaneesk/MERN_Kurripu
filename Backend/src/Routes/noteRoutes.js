@@ -4,7 +4,6 @@ import authMiddleware from "../Middleware/authMiddleware.js";
 
 const router = express.Router();
 
-// require auth for all note routes
 router.use(authMiddleware);
 
 router.get("/", getAllNotes);

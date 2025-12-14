@@ -30,14 +30,12 @@ const CreatePage = () => {
   navigate("/home");
     } catch (error) {
       console.log("Error creating note", error);
-      // network errors won't have error.response
       if (error.response?.status === 429) {
         toast.error("Slow down! You're creating notes too fast", {
           duration: 4000,
           icon: "💀",
         });
       } else if (!error.response) {
-        // likely network error / connection refused
         toast.error("Network error: could not reach the server");
       } else {
         toast.error("Failed to create note");

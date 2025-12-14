@@ -18,7 +18,6 @@ const NoteDetailPage = () => {
     const fetchNote = async () => {
       try {
   const res = await api.get(`/notes/${id}`);
-  // backend returns { message, note } for single-note fetch; handle both shapes
   setNote(res.data?.note ?? res.data);
       } catch (error) {
         console.log("Error in fetching note", error);

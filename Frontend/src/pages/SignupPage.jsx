@@ -25,7 +25,6 @@ const SignupPage = () => {
     setLoading(true);
     try {
       const res = await api.post('/auth/signup', { email, password });
-      // if backend returns a token, store it and navigate
       const token = res?.data?.token;
       if (token) {
         localStorage.setItem('token', token);
@@ -38,7 +37,6 @@ const SignupPage = () => {
     } catch (error) {
       console.error('Signup error', error);
       if (!error.response) {
-        // fallback demo signup -> log in locally
         localStorage.setItem('token', 'demo-token');
         toast.success('Offline demo account created');
         navigate('/home');

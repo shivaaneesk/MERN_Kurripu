@@ -10,7 +10,6 @@ const NoteCard = ({ note, setNotes }) => {
   const [deleting, setDeleting] = useState(false);
 
   const handleDelete = async (e, id) => {
-    // Prevent Link navigation and stop propagation so click doesn't bubble to parent Link
     e.preventDefault();
     e.stopPropagation();
 

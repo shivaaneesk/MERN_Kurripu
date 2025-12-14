@@ -60,7 +60,6 @@ export async function deleteNote(req, res){
         if(!note) return res.status(404).json({message : "Note Not Found"});
         if(note.owner !== owner) return res.status(403).json({ message: 'Forbidden' });
 
-    // use findByIdAndDelete to avoid potential document remove issues
     const deleted = await Note.findByIdAndDelete(req.params.id);
     if (!deleted) return res.status(404).json({ message: 'Note Not Found' });
     res.status(200).json({message : "Note Deleted Successfully", note: deleted});

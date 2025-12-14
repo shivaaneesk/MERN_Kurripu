@@ -1,4 +1,3 @@
-// Simple in-memory auth controller for local development
 const users = [];
 
 export function signup(req, res) {
@@ -10,7 +9,6 @@ export function signup(req, res) {
     if (exists) return res.status(409).json({ message: 'User already exists' });
 
     users.push({ email: email.toLowerCase(), password });
-    // return a demo token (base64 of email + timestamp)
     const token = Buffer.from(JSON.stringify({ email: email.toLowerCase(), ts: Date.now() })).toString('base64');
     return res.status(201).json({ message: 'User created', token });
   } catch (error) {
