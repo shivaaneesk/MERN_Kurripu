@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // When deploying to the public Chrome Web Store, flip USE_PROD to true 
   // and paste your actual Vercel URL below!
   const USE_PROD = true; 
-  const PROD_URL = 'https://kurripu-notes.vercel.app/api'; 
+  const PROD_URL = 'https://kurripu.vercel.app/login'; 
   const LOCAL_URL = 'http://localhost:3000/api';
   
   const BASE_API = USE_PROD ? PROD_URL : LOCAL_URL;
