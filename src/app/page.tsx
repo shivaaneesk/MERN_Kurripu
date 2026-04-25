@@ -158,6 +158,30 @@ export default function Home() {
     localStorage.setItem(notifiedKey, JSON.stringify(notifiedSet));
   };
 
+  const showExtensionGuidelines = () => {
+    toast.custom((t) => (
+      <div className={`${t.visible ? 'animate-enter' : 'animate-leave'} max-w-sm w-full bg-white dark:bg-[#1a0a2a] shadow-2xl rounded-2xl pointer-events-auto flex flex-col ring-1 ring-black/5 dark:ring-purple-500/30 overflow-hidden`}>
+        <div className="p-6">
+          <h3 className="text-xl font-heading font-black text-purple-600 dark:text-purple-400 uppercase tracking-widest mb-4">Installation Guide</h3>
+          <p className="text-sm font-sans text-zinc-600 dark:text-zinc-300 mb-4 leading-relaxed font-medium">
+            Your ZIP is downloading! To install it:
+          </p>
+          <ol className="text-sm font-sans text-zinc-700 dark:text-zinc-400 space-y-3 font-medium mb-6 ml-4 list-decimal">
+            <li>Type <code className="bg-black/5 dark:bg-white/10 px-2 py-1 rounded text-purple-600 dark:text-purple-300 font-mono">chrome://extensions</code> in a new tab.</li>
+            <li>Enable <strong>Developer mode</strong> in the top right.</li>
+            <li>Drag and drop the downloaded ZIP directly into the page!</li>
+          </ol>
+          <button
+            onClick={() => toast.dismiss(t.id)}
+            className="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 rounded-xl transition-colors uppercase tracking-widest text-sm active:scale-95 border border-transparent shadow-md"
+          >
+            I Got It
+          </button>
+        </div>
+      </div>
+    ), { duration: 15000 });
+  };
+
   const handleCreateNote = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!title || !content) {
@@ -233,7 +257,7 @@ export default function Home() {
           <p className="text-xs font-bold uppercase tracking-[0.3em] text-zinc-600 dark:text-zinc-400 mt-2 font-sans">Your Centralized Notebook</p>
         </div>
         <div className="flex items-center gap-3 md:gap-4 flex-wrap justify-center">
-          <a href="/kurripu_extension.zip" download="kurripu_extension.zip" className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-purple-400 hover:opacity-90 transition-opacity text-white px-4 py-2 rounded-full font-bold text-[10px] uppercase tracking-widest shadow-[0_0_15px_rgba(168,85,247,0.3)]">
+          <a href="/kurripu_extension.zip" download="kurripu_extension.zip" onClick={showExtensionGuidelines} className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-purple-400 hover:opacity-90 transition-opacity text-white px-4 py-2 rounded-full font-bold text-[10px] uppercase tracking-widest shadow-[0_0_15px_rgba(168,85,247,0.3)]">
             <Download size={14} className="stroke-[3]" /> Download Extension
           </a>
           <ThemeToggle />
