@@ -233,8 +233,8 @@ export default function Home() {
           <p className="text-xs font-bold uppercase tracking-[0.3em] text-zinc-600 dark:text-zinc-400 mt-2 font-sans">Your Centralized Notebook</p>
         </div>
         <div className="flex items-center gap-3 md:gap-4 flex-wrap justify-center">
-          <a href="#" onClick={() => alert('Publish your extension to the Chrome Store, then put the link here!')} className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-purple-400 hover:opacity-90 transition-opacity text-white px-4 py-2 rounded-full font-bold text-[10px] uppercase tracking-widest shadow-[0_0_15px_rgba(168,85,247,0.3)]">
-            <Download size={14} className="stroke-[3]" /> Add to Chrome
+          <a href="/kurripu_extension.zip" download="kurripu_extension.zip" className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-purple-400 hover:opacity-90 transition-opacity text-white px-4 py-2 rounded-full font-bold text-[10px] uppercase tracking-widest shadow-[0_0_15px_rgba(168,85,247,0.3)]">
+            <Download size={14} className="stroke-[3]" /> Download Extension
           </a>
           <ThemeToggle />
           <span className="font-sans font-bold tracking-widest uppercase text-[10px] md:text-xs text-purple-700 dark:text-purple-300 bg-purple-500/10 px-4 py-2 rounded-full border border-purple-500/20 shadow-[0_0_15px_rgba(168,85,247,0.15)] dark:text-glow hidden sm:inline-block">
