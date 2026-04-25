@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  body {
+    @apply antialiased font-sans min-h-[100dvh] text-base text-zinc-900 bg-zinc-50 overflow-x-hidden transition-colors duration-700 ease-in-out;
+  }
+  
+  /* Fallback or base light theme blob */
+  body::before {
+    content: "";
+    position: fixed;
+    top: -10%; left: -10%; width: 50vw; height: 50vw;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.05) 0%, rgba(255,255,255,0) 70%);
+    border-radius: 50%; z-index: -1; pointer-events: none;
+    animation: blob-cosmic 15s infinite alternate;
+  }
+  body::after {
+    content: "";
+    position: fixed;
+    bottom: -10%; right: -10%; width: 60vw; height: 60vw;
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.05) 0%, rgba(255,255,255,0) 70%);
+    border-radius: 50%; z-index: -1; pointer-events: none;
+    animation: blob-cosmic 20s infinite alternate-reverse;
+  }
+
+  /* Deep Cosmic Background for Dark Mode */
+  .dark body {
+    @apply text-zinc-50;
+    background: radial-gradient(circle at top left, #0D001A 0%, #030005 100%);
+    background-attachment: fixed;
+  }
+
+  .dark body::before {
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, rgba(0,0,0,0) 70%);
+  }
+  .dark body::after {
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.1) 0%, rgba(0,0,0,0) 70%);
+  }
+}
+
+@keyframes blob-cosmic {
+  0% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/70 dark:bg-black/40 backdrop-blur-xl border border-black/10 dark:border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.05)] dark:shadow-[0_8px_32px_0_rgba(31,38,135,0.15)];
+  }
+  
+  .glass-card {
+    @apply bg-white/70 dark:bg-black/40 backdrop-blur-xl border border-black/10 dark:border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.05)] dark:shadow-[0_8px_32px_0_rgba(31,38,135,0.15)] hover:bg-white/80 dark:hover:bg-black/60 hover:border-black/20 dark:hover:border-white/20 hover:shadow-[0_8px_32px_0_rgba(0,0,0,0.1)] dark:hover:shadow-[0_8px_32px_0_rgba(139,92,246,0.2)] transition-all duration-300;
+  }
+  
+  .text-glow {
+    text-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+  }
+
+  .font-heading {
+    font-family: var(--font-outfit), sans-serif;
+  }
+
+  .font-sans, body {
+    font-family: var(--font-inter), sans-serif;
+  }
+}
+
+/* Hide scrollbars for aesthetic */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-zinc-50 dark:bg-[#030005];
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.3);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.6);
+}
