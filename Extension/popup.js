@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
         authError.innerText = data.error || 'Authentication Failed';
       }
     } catch (e) {
-      authError.innerText = 'Network Error.';
+      authError.innerText = 'Error: ' + e.message;
     } finally {
       loginBtn.innerText = 'Log In';
       loginBtn.disabled = false;
@@ -162,8 +162,8 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
           noteError.innerText = data.error || 'Failed to pin note.';
         }
-      } catch (error) {
-        noteError.innerText = 'Network Error.';
+      } catch (e) {
+        noteError.innerText = 'Error: ' + e.message;
       } finally {
         saveBtn.innerText = 'Pin Note';
         saveBtn.disabled = false;
