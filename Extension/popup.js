@@ -2,13 +2,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // DOM Elements
   const authView = document.getElementById('authView');
   const noteView = document.getElementById('noteView');
-  
+
   // Auth Elements
   const loginEmail = document.getElementById('loginEmail');
   const loginPassword = document.getElementById('loginPassword');
   const loginBtn = document.getElementById('loginBtn');
   const authError = document.getElementById('authError');
-  
+
   // Note Elements
   const noteTitle = document.getElementById('noteTitle');
   const noteContent = document.getElementById('noteContent');
@@ -17,17 +17,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const noteError = document.getElementById('noteError');
   const logoutBtn = document.getElementById('logoutBtn');
   const swatches = document.querySelectorAll('.swatch');
-  
+
   // --- DEPLOYMENT CONFIGURATION ---
   // When deploying to the public Chrome Web Store, flip USE_PROD to true 
   // and paste your actual Vercel URL below!
-  const USE_PROD = true; 
-  const PROD_URL = 'https://kurripu.vercel.app/login'; 
+  const USE_PROD = true;
+  const PROD_URL = 'https://kurripu.vercel.app/api';
   const LOCAL_URL = 'http://localhost:3000/api';
-  
+
   const BASE_API = USE_PROD ? PROD_URL : LOCAL_URL;
   // --------------------------------
-  
+
   let selectedColor = 'default';
 
   // Initialize Extension State
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       const data = await res.json();
-      
+
       if (data.success && data.token) {
         chrome.storage.local.set({ kurripu_token: data.token }, () => {
           showNoteView();
