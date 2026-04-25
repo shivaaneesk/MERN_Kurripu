@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    loginBtn.innerText = 'Communicating...';
+    loginBtn.innerText = 'Logging in...';
     loginBtn.disabled = true;
 
     try {
@@ -96,9 +96,9 @@ document.addEventListener('DOMContentLoaded', () => {
         authError.innerText = data.error || 'Authentication Failed';
       }
     } catch (e) {
-      authError.innerText = 'Network Error. Is Kurripu running?';
+      authError.innerText = 'Network Error.';
     } finally {
-      loginBtn.innerText = 'Authenticate';
+      loginBtn.innerText = 'Log In';
       loginBtn.disabled = false;
     }
   });
@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    saveBtn.innerText = 'Transmitting...';
+    saveBtn.innerText = 'Saving...';
     saveBtn.disabled = true;
 
     chrome.storage.local.get(['kurripu_token'], async (result) => {
@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
           noteError.innerText = data.error || 'Failed to pin note.';
         }
       } catch (error) {
-        noteError.innerText = 'Network link broken.';
+        noteError.innerText = 'Network Error.';
       } finally {
         saveBtn.innerText = 'Pin Note';
         saveBtn.disabled = false;
